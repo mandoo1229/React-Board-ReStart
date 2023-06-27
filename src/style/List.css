@@ -1,0 +1,44 @@
+.custom-table {
+  width: 50%;
+  height: 50%;
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+  margin-top: 16px;
+}
+
+.search-input {
+  margin-right: 8px;
+  width: 30%;
+  height: 36px;
+  padding: 0 8px;
+  font-size: 14px;
+}
+
+.search-select {
+  margin-right: 8px;
+  width: 10%;
+  height: 41px;
+  font-size: 14px;
+}
+
+.search-button {
+  height: 36px;
+}
+
+.list-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  width: 50%;
+  margin-top: 16px;
+}
