@@ -13,6 +13,8 @@ import Button from '@mui/material/Button';
 const List = memo(({ list, dispatch }) => {
   const [search, setSearch] = useState('');
   const [searchBy, setSearchBy] = useState('title');
+  const [currentPage, setCurrentPage] = useState(1); // 현재 페이지
+  const itemsPerPage = 10; // 페이지당 보여줄 아이템 수
   const [filteredItems, setFilteredItems] = useState([]);
 
   const onClickItem = useCallback(
@@ -42,6 +44,29 @@ const List = memo(({ list, dispatch }) => {
     setSearch(e.target.value);
   };
 
+  const paginateData = (data) => {
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    return data.slice(startIndex, endIndex);
+  };
+
+  const Pagination = () => {
+    const totalPages = Math.ceil(list.length / itemsPerPage);
+    const pageNumbers = Array.from({ length: totalPages }, (_, index) => index + 1);
+
+    return (
+      <div className="pagination">
+        {pageNumbers.map((number) => (
+          <button key={number} onClick={() => setCurrentPage(number)}>
+            {number}
+          </button>
+        ))}
+      </div>
+    );
+  };
+
+  const sortedList = [...list].reverse(); // 최신글이 1페이지에 오도록 역순으로 정렬
+
   return (
     <div className="list-container">
       <Table size="small" aria-label="a dense table" style={{ width: '50%', height: '50%' }}>
@@ -53,21 +78,19 @@ const List = memo(({ list, dispatch }) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {(filteredItems.length > 0 ? filteredItems : list)
-            .sort((a, b) => b.id - a.id)
-            .map((item) => {
-              return (
-                <TableRow key={item.id}>
-                  <TableCell align="center">
-                    <Link onClick={onClickItem(item.id)} to={`/detail/${item.id}`}>
-                      {item.title}
-                    </Link>
-                  </TableCell>
-                  <TableCell align="center">{item.date}</TableCell>
-                  <TableCell align="center">{item.views}</TableCell>
-                </TableRow>
-              );
-            })}
+          {paginateData(filteredItems.length > 0 ? filteredItems : sortedList).map((item) => {
+            return (
+              <TableRow key={item.id}>
+                <TableCell align="center">
+                  <Link onClick={onClickItem(item.id)} to={`/detail/${item.id}`}>
+                    {item.title}
+                  </Link>
+                </TableCell>
+                <TableCell align="center">{item.date}</TableCell>
+                <TableCell align="center">{item.views}</TableCell>
+              </TableRow>
+            );
+          })}
         </TableBody>
       </Table>
       <div className="button-container">
@@ -91,6 +114,7 @@ const List = memo(({ list, dispatch }) => {
           검색
         </Button>
       </div>
+      <Pagination />
     </div>
   );
 });
