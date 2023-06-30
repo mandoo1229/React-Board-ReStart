@@ -20,8 +20,15 @@ const List = memo(({ list, dispatch }) => {
   const onClickItem = useCallback(
     (id) => () => {
       dispatch({ type: INCREASE_VIEWS, id });
+      const updatedList = list.map((item) => {
+        if (item.id === id) {
+          return { ...item, views: item.views + 1 };
+        }
+        return item;
+      });
+      localStorage.setItem('list', JSON.stringify(updatedList));
     },
-    [dispatch]
+    [dispatch, list]
   );
 
   useEffect(() => {
