@@ -38,6 +38,22 @@
 - 디자인은 중요하지 않습니다. 기능 구현을 우선순위로 두세요.
 </details>
 
+<h2>개발환경</h2>
+
+❖ IDE ❖ <br><br>
+<img src="https://img.shields.io/badge/Visual Studio Code-007ACC?style=flat&logo=Visual Studio Code&logoColor=white"/>
+
+❖ Language ❖ <br><br>
+<img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black" />
+
+❖ Framework ❖ <br><br>
+<img src="https://img.shields.io/badge/React-61DAFB?style=flat&logo=react&logoColor=black"/>
+<img src="https://img.shields.io/badge/npm v9.6.3-CB3837?style=flat&logo=npm&logoColor=white"/>
+
+❖ library ❖
+
+- Material Ui
+
 ## Git Convention
 
 | 태그 이름 |                         설명                          |
