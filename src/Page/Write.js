@@ -49,7 +49,7 @@ const Write = memo(({ id, dispatch }) => {
       const list = localList ? JSON.parse(localList) : [];
       list.push(item);
       localStorage.setItem('list', JSON.stringify(list));
-      // localStorage.setItem('id', id + 1);
+      localStorage.setItem('id', id + 1);
       navigate(`/detail/${item.id}`);
     }
   };
