@@ -35,13 +35,18 @@ const Update = memo(({ dispatch }) => {
       alert('글을 작성해주세요. ');
       inputContenet.current.focus();
     } else {
-      item.title = title;
-      item.content = content;
-      dispatch({ type: UPDATE_ITEM, item });
+      const updateItem = { ...item, title, content };
+      dispatch({ type: UPDATE_ITEM, item: updateItem }); //item대신 updateItem을 전달한다.
+      const localList = localStorage.getItem('list');
+      const list = localList ? JSON.parse(localList) : [];
+      const updateList = list.map((listItem) => (listItem.id === updateItem.id ? updateItem : listItem));
+      localStorage.setItem('list', JSON.stringify(updateList));
       navigate(`/detail/${item.id}`);
     }
   };
-
+  // localStorage에서 list키 값을 가져와 파싱하여 'list'배열로 변환한다.
+  // list 배열을 map메서드를 사용하여 각 item을 확인하고 updateItem의 id와 일치하는 item이 있는 경우에는 'updateItem'으로 교체한다. 그렇지 않으면 원래데로 유지한다.
+  // 이후 detail페이지로 이동을 한다.
   return (
     <div>
       {item ? (
