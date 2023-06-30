@@ -17,6 +17,11 @@ const Detail = memo(({ dispatch }) => {
   const onClickDelete = useCallback(() => {
     if (item) {
       dispatch({ type: DELETE_ITEM, id: item.id });
+
+      const localList = localStorage.getItem('list');
+      const list = localList ? JSON.parse(localList) : [];
+      const updateList = list.filter((listItem) => listItem.id !== item.id);
+      localStorage.setItem('list', JSON.stringify(updateList));
       alert('삭제 되었습니다.');
       navigate('/');
     } else {
@@ -36,7 +41,7 @@ const Detail = memo(({ dispatch }) => {
             </tr>
             <br></br>
             <tr>
-              <th>내용 : {item.content} </th>
+              <td>내용 : {item.content} </td>
             </tr>
           </table>
           <br></br>
