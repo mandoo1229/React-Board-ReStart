@@ -9,6 +9,7 @@ import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Button from '@mui/material/Button';
+import Pagination from '@mui/material/Pagination';
 
 const List = memo(({ list, dispatch }) => {
   const [search, setSearch] = useState('');
@@ -57,21 +58,6 @@ const List = memo(({ list, dispatch }) => {
     return data.slice(startIndex, endIndex);
   };
 
-  const Pagination = () => {
-    const totalPages = Math.ceil(list.length / itemsPerPage);
-    const pageNumbers = Array.from({ length: totalPages }, (_, index) => index + 1);
-
-    return (
-      <div className="pagination">
-        {pageNumbers.map((number) => (
-          <button key={number} onClick={() => setCurrentPage(number)}>
-            {number}
-          </button>
-        ))}
-      </div>
-    );
-  };
-
   const sortedList = [...list].reverse(); // 최신글이 1페이지에 오도록 역순으로 정렬
 
   return (
@@ -101,8 +87,10 @@ const List = memo(({ list, dispatch }) => {
         </TableBody>
       </Table>
       <div className="button-container">
-        <Button variant="outlined" color="secondary" style={{ marginLeft: 'auto' }}>
-          <Link to="/write">write</Link>
+        <Button variant="contained" color="secondary" style={{ marginLeft: 'auto', color: 'white' }}>
+          <Link to="/write" style={{ color: 'inherit', textDecoration: 'none' }}>
+            write
+          </Link>
         </Button>
       </div>
       <div className="search-container">
@@ -121,7 +109,15 @@ const List = memo(({ list, dispatch }) => {
           검색
         </Button>
       </div>
-      <Pagination />
+      <div className="pagination-container">
+        <Pagination
+          style={{ marginTop: '20px' }}
+          count={Math.ceil(filteredItems.length > 0 ? filteredItems.length / itemsPerPage : list.length / itemsPerPage)}
+          page={currentPage}
+          onChange={(event, page) => setCurrentPage(page)}
+          color="primary"
+        />
+      </div>
     </div>
   );
 });

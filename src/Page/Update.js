@@ -79,7 +79,9 @@ const Update = memo(({ dispatch }) => {
               저장
             </Button>
             <Button variant="contained" color="error" style={{ marginLeft: '8px' }}>
-              <Link to="/">취소</Link>
+              <Link to="/" style={{ color: 'inherit', textDecoration: 'none' }}>
+                취소
+              </Link>
             </Button>
           </div>
         </div>

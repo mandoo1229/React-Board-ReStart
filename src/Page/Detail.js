@@ -44,12 +44,16 @@ const Detail = memo(({ dispatch }) => {
               <td>내용 : {item.content} </td>
             </tr>
           </table>
-          <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '200px' }}>
-            <Button color="secondary" href="/">
-              <Link to="/">목록으로 가기</Link>
+          <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '100px' }}>
+            <Button variant="contained" color="secondary" href="/">
+              <Link to="/" style={{ color: 'inherit', textDecoration: 'none' }}>
+                목록으로 가기
+              </Link>
             </Button>
             <Button variant="contained" href={`/update/${item.id}`} style={{ marginLeft: '540px' }}>
-              <Link to={`/update/${item.id}`}>수정</Link>
+              <Link to={`/update/${item.id}`} style={{ color: 'inherit', textDecoration: 'none' }}>
+                수정
+              </Link>
             </Button>
             <Button variant="contained" color="error" onClick={onClickDelete}>
               삭제
