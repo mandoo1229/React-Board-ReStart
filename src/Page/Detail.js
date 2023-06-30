@@ -44,14 +44,7 @@ const Detail = memo(({ dispatch }) => {
               <td>내용 : {item.content} </td>
             </tr>
           </table>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '200px' }}>
             <Button color="secondary" href="/">
               <Link to="/">목록으로 가기</Link>
             </Button>
