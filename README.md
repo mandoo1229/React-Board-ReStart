@@ -48,11 +48,13 @@
 
 ❖ Framework ❖ <br><br>
 <img src="https://img.shields.io/badge/React-61DAFB?style=flat&logo=react&logoColor=black"/>
-<img src="https://img.shields.io/badge/npm v9.6.3-CB3837?style=flat&logo=npm&logoColor=white"/>
+<img src="https://img.shields.io/badge/npm v9.6.7-CB3837?style=flat&logo=npm&logoColor=white"/>
 
 ❖ library ❖
 
 - Material Ui
+
+npm install @mui/material @emotion/react @emotion/styled
 
 ## Git Convention
 
