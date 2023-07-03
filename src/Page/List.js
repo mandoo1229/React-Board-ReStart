@@ -75,7 +75,11 @@ const List = memo(({ list, dispatch }) => {
             return (
               <TableRow key={item.id}>
                 <TableCell align="center">
-                  <Link onClick={onClickItem(item.id)} to={`/detail/${item.id}`}>
+                  <Link
+                    onClick={onClickItem(item.id)}
+                    to={`/detail/${item.id}`}
+                    style={{ color: 'inherit', textDecoration: 'none' }}
+                  >
                     {item.title}
                   </Link>
                 </TableCell>
