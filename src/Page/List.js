@@ -61,67 +61,69 @@ const List = memo(({ list, dispatch }) => {
   const sortedList = [...list].reverse(); // 최신글이 1페이지에 오도록 역순으로 정렬
 
   return (
-    <div className="list-container">
-      <Table size="small" aria-label="a dense table" style={{ width: '50%', height: '50%' }}>
-        <TableHead>
-          <TableRow>
-            <TableCell align="center">제목</TableCell>
-            <TableCell align="center">작성일</TableCell>
-            <TableCell align="center">조회수</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
+    <div className="container">
+      <table className="rwd-table">
+        <tbody>
+          <tr>
+            <th>제목</th>
+            <th>작성일</th>
+            <th>조회수</th>
+          </tr>
           {paginateData(filteredItems.length > 0 ? filteredItems : sortedList).map((item) => {
             return (
-              <TableRow key={item.id}>
-                <TableCell align="center">
+              <tr key={item.id}>
+                <td>
                   <Link
                     onClick={onClickItem(item.id)}
                     to={`/detail/${item.id}`}
                     style={{ color: 'inherit', textDecoration: 'none' }}
                   >
+                    {' '}
                     {item.title}
                   </Link>
-                </TableCell>
-                <TableCell align="center">{item.date}</TableCell>
-                <TableCell align="center">{item.views}</TableCell>
-              </TableRow>
+                </td>
+                <td>{item.date}</td>
+                <td>{item.views}</td>
+              </tr>
             );
           })}
-        </TableBody>
-      </Table>
-      <div className="button-container">
-        <Button variant="contained" color="secondary" style={{ marginLeft: 'auto', color: 'white' }}>
-          <Link to="/write" style={{ color: 'inherit', textDecoration: 'none' }}>
-            write
-          </Link>
-        </Button>
-      </div>
-      <div className="search-container">
-        <select className="search-select" value={searchBy} onChange={(e) => setSearchBy(e.target.value)}>
-          <option value="title">제목</option>
-          <option value="content">내용</option>
-        </select>
-        <input
-          className="search-input"
-          type="text"
-          placeholder="검색어를 작성해주세요"
-          value={search}
-          onChange={handleInputChange}
-        />
-        <Button className="search-button" variant="contained" color="primary" onClick={handleSearch}>
-          검색
-        </Button>
-      </div>
-      <div className="pagination-container">
-        <Pagination
-          style={{ marginTop: '20px' }}
-          count={Math.ceil(filteredItems.length > 0 ? filteredItems.length / itemsPerPage : list.length / itemsPerPage)}
-          page={currentPage}
-          onChange={(event, page) => setCurrentPage(page)}
-          color="primary"
-        />
-      </div>
+          <Table size="small" aria-label="a dense table" style={{ width: '50%', height: '50%' }}></Table>
+          <div className="button-container">
+            <Button variant="contained" color="secondary" style={{ color: 'white' }}>
+              <Link to="/write" style={{ color: 'inherit', textDecoration: 'none' }}>
+                write
+              </Link>
+            </Button>
+          </div>
+          <div className="search-container">
+            <select className="search-select" value={searchBy} onChange={(e) => setSearchBy(e.target.value)}>
+              <option value="title">제목</option>
+              <option value="content">내용</option>
+            </select>
+            <input
+              className="search-input"
+              type="text"
+              placeholder="검색어를 작성해주세요"
+              value={search}
+              onChange={handleInputChange}
+            />
+            <Button className="search-button" variant="contained" color="primary" onClick={handleSearch}>
+              검색
+            </Button>
+          </div>
+          <div className="pagination-container">
+            <Pagination
+              style={{ marginTop: '20px' }}
+              count={Math.ceil(
+                filteredItems.length > 0 ? filteredItems.length / itemsPerPage : list.length / itemsPerPage
+              )}
+              page={currentPage}
+              onChange={(event, page) => setCurrentPage(page)}
+              color="primary"
+            />
+          </div>
+        </tbody>
+      </table>
     </div>
   );
 });
