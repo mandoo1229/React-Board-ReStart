@@ -56,7 +56,7 @@ const Update = memo(({ dispatch }) => {
             label="제목을 작성해주세요"
             multiline
             maxRows={4}
-            style={{ width: '80%' }}
+            style={{ width: '60%', marginTop: '1%' }}
             ref={inputTitle}
             name="title"
             value={title}
@@ -67,14 +67,14 @@ const Update = memo(({ dispatch }) => {
             id="outlined-multiline-static"
             ref={inputContenet}
             multiline
-            rows={30}
-            style={{ width: '80%' }}
+            rows={20}
+            style={{ width: '60%', marginTop: '1%' }}
             defaultValue="내용을 입력해주세요. "
             name="content"
             value={content}
             onChange={onChangeInput}
           />
-          <div style={{ display: 'flex', justifyContent: 'flex-end', width: '80%', marginTop: '16px' }}>
+          <div style={{ display: 'flex', justifyContent: 'flex-end', width: '60%', marginTop: '2%' }}>
             <Button variant="contained" onClick={onClickSubmit}>
               저장
             </Button>
