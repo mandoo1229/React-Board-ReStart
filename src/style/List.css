@@ -5,14 +5,15 @@
 
 .search-container {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  justify-content: right;
+  align-items: right;
+  margin: 0 auto;
   width: 50%;
-  margin-top: 16px;
+  margin-top: 30px;
 }
 
 .search-input {
-  margin-right: 8px;
+  margin-right: 2%;
   width: 30%;
   height: 36px;
   padding: 0 8px;
@@ -30,6 +31,15 @@
   height: 36px;
 }
 
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  width: 50%;
+  margin-top: 16px;
+}
+
 .list-container {
   display: flex;
   flex-direction: column;
@@ -38,7 +48,9 @@
 
 .button-container {
   display: flex;
-  justify-content: space-between;
+  justify-content: right;
+  align-items: right;
+  margin: 0 auto;
   width: 50%;
   margin-top: 16px;
 }
