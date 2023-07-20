@@ -4,6 +4,7 @@ import { ADD_ITEM, CHANGE_MENU } from '../reducers/BoardReducer';
 import useInputs from '../hook/useInput';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import '../style/Write.css';
 
 function formatDateTime(date) {
   const year = date.getFullYear();
@@ -64,7 +65,7 @@ const Write = memo(({ id, dispatch }) => {
         label="제목을 작성해주세요"
         multiline
         maxRows={4}
-        style={{ width: '80%' }}
+        style={{ width: '60%', marginTop: '2%' }}
         ref={inputTitle}
         name="title"
         value={title}
@@ -76,14 +77,14 @@ const Write = memo(({ id, dispatch }) => {
         id="outlined-multiline-static"
         ref={inputContent}
         multiline
-        rows={30}
-        style={{ width: '80%' }}
+        rows={20}
+        style={{ width: '60%', marginTop: '1%' }}
         name="content"
         value={content}
         onChange={onChangeInput}
       />
-      <div style={{ display: 'flex', justifyContent: 'flex-end', width: '80%', marginTop: '16px' }}>
-        <Button variant="contained" onClick={onClickSubmit}>
+      <div style={{ display: 'flex', justifyContent: 'flex-end', width: '60%', marginTop: '16px' }}>
+        <Button className="Button-save" variant="contained" onClick={onClickSubmit}>
           저장
         </Button>
         <Button variant="contained" color="error" style={{ marginLeft: '8px' }}>
