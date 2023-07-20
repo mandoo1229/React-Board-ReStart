@@ -5,6 +5,7 @@ import Update from './Update';
 import Detail from './Detail';
 import Write from './Write';
 import List from './List';
+import Header from './Header';
 
 const initialState = {
   list: [],
@@ -25,6 +26,7 @@ const Board = () => {
   return (
     <div>
       <BrowserRouter basename={process.env.PUBLIC_URL}>
+        <Header />
         <div style={{ display: 'flex', justifyContent: 'center' }}>
           <h1>{menu}</h1>
         </div>
