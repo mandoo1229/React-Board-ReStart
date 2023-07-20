@@ -3,11 +3,6 @@ import { Link } from 'react-router-dom';
 import { CHANGE_MENU } from '../reducers/BoardReducer';
 import { INCREASE_VIEWS } from '../reducers/BoardReducer';
 import '../style/List.css';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
 import Button from '@mui/material/Button';
 import Pagination from '@mui/material/Pagination';
 
@@ -62,6 +57,27 @@ const List = memo(({ list, dispatch }) => {
 
   return (
     <div>
+      <div className="search-container">
+        <select
+          className="search-select"
+          style={{ textAlign: 'center' }}
+          value={searchBy}
+          onChange={(e) => setSearchBy(e.target.value)}
+        >
+          <option value="title">제목</option>
+          <option value="content">내용</option>
+        </select>
+        <input
+          className="search-input"
+          type="text"
+          placeholder="검색어를 작성해주세요"
+          value={search}
+          onChange={handleInputChange}
+        />
+        <Button className="search-button" variant="contained" color="primary" onClick={handleSearch}>
+          검색
+        </Button>
+      </div>
       <table className="rwd-table">
         <tbody>
           <tr>
@@ -78,7 +94,6 @@ const List = memo(({ list, dispatch }) => {
                     to={`/detail/${item.id}`}
                     style={{ color: 'inherit', textDecoration: 'none' }}
                   >
-                    {' '}
                     {item.title}
                   </Link>
                 </td>
@@ -87,31 +102,23 @@ const List = memo(({ list, dispatch }) => {
               </tr>
             );
           })}
+          <div className="button-container">
+            <Button
+              variant="contained"
+              size="small"
+              color="secondary"
+              style={{ color: 'white', marginRight: '9%', marginLeft: '2%' }}
+            >
+              <Link to="/write" style={{ color: 'inherit', textDecoration: 'none' }}>
+                write
+              </Link>
+            </Button>
+          </div>
           {/* <Table size="small" aria-label="a dense table" style={{ width: '50%', height: '50%' }}></Table> */}
         </tbody>
       </table>
       {/* <div className="button-container"></div> */}
-      <div className="search-container">
-        <select className="search-select" value={searchBy} onChange={(e) => setSearchBy(e.target.value)}>
-          <option value="title">제목</option>
-          <option value="content">내용</option>
-        </select>
-        <input
-          className="search-input"
-          type="text"
-          placeholder="검색어를 작성해주세요"
-          value={search}
-          onChange={handleInputChange}
-        />
-        <Button className="search-button" variant="contained" color="primary" onClick={handleSearch}>
-          검색
-        </Button>
-        <Button variant="contained" color="secondary" style={{ color: 'white', marginRight: '9%', marginLeft: '2%' }}>
-          <Link to="/write" style={{ color: 'inherit', textDecoration: 'none' }}>
-            write
-          </Link>
-        </Button>
-      </div>
+
       <div className="pagination-container">
         <Pagination
           style={{ marginTop: '20px' }}
@@ -121,7 +128,6 @@ const List = memo(({ list, dispatch }) => {
           color="primary"
         />
       </div>
-      <div className="button-container"></div>
     </div>
   );
 });
