@@ -1,5 +1,9 @@
 .haeder {
-  height: 80px;
+  height: 60px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   text-align: left;
+  font-family: 'ProFont for Powerline';
+  font-size: 32px;
+  padding-left: 20px;
+  padding-top: 23px;
 }
