@@ -4,6 +4,7 @@ import { CHANGE_MENU, DELETE_ITEM } from '../reducers/BoardReducer';
 import { getLocalItem } from '../utill/utill';
 import Button from '@mui/material/Button';
 import Error from './Error';
+import '../style/Detail.css';
 
 const Detail = memo(({ dispatch }) => {
   const { id } = useParams();
@@ -29,28 +30,30 @@ const Detail = memo(({ dispatch }) => {
     }
   }, [dispatch, navigate, item]);
   return (
-    <div style={{ display: 'flex', justifyContent: 'center' }}>
+    <div>
       {item ? (
-        <div>
-          <table style={{ width: '800px' }}>
-            <tr>
-              <h2>제목 : {item.title}</h2>
-              <th style={{ textAlign: 'right' }}>날짜 : {item.date}</th>
-              <th style={{ textAlign: 'right' }}>조회수</th>
-              <td style={{ textAlign: 'right' }}>{item.views} </td>
-            </tr>
-            <br></br>
-            <tr>
-              <td>내용 : {item.content} </td>
-            </tr>
-          </table>
+        <div className="detail-wrap">
+          <div className="detail-view">
+            <div className="title">제목 : {item.title}</div>
+            <div className="info">
+              <dl>
+                <dt>작성일 : </dt>
+                <dd>{item.date}</dd>
+              </dl>
+              <dl>
+                <dt>조회수 : </dt>
+                <dd>{item.views}</dd>
+              </dl>
+            </div>
+            <div className="cont"> {item.content} </div>
+          </div>
           <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '100px' }}>
             <Button variant="contained" color="secondary" href="/">
               <Link to="/" style={{ color: 'inherit', textDecoration: 'none' }}>
                 목록으로 가기
               </Link>
             </Button>
-            <Button variant="contained" href={`/update/${item.id}`} style={{ marginLeft: '540px' }}>
+            <Button variant="contained" href={`/update/${item.id}`} style={{ marginLeft: '700px' }}>
               <Link to={`/update/${item.id}`} style={{ color: 'inherit', textDecoration: 'none' }}>
                 수정
               </Link>
