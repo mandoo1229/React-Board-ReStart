@@ -114,11 +114,8 @@ const List = memo(({ list, dispatch }) => {
               </Link>
             </Button>
           </div>
-          {/* <Table size="small" aria-label="a dense table" style={{ width: '50%', height: '50%' }}></Table> */}
         </tbody>
       </table>
-      {/* <div className="button-container"></div> */}
-
       <div className="pagination-container">
         <Pagination
           style={{ marginTop: '20px' }}

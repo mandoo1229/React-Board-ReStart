@@ -4,7 +4,6 @@ import { ADD_ITEM, CHANGE_MENU } from '../reducers/BoardReducer';
 import useInputs from '../hook/useInput';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import '../style/Write.css';
 
 function formatDateTime(date) {
   const year = date.getFullYear();
@@ -76,6 +75,7 @@ const Write = memo(({ id, dispatch }) => {
       <TextField
         id="outlined-multiline-static"
         ref={inputContent}
+        label="내용을 입력해주세요"
         multiline
         rows={20}
         style={{ width: '60%', marginTop: '1%' }}
