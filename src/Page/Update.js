@@ -29,19 +29,19 @@ const Update = memo(({ dispatch }) => {
 
   const onClickSubmit = () => {
     if (!title) {
-      alert('제목을 작성해주세요.');
+      alert('제목을 작성해주세요.'); //title에 글을 작성하지 않으면 실행됩니다.
       inputTitle.current.focus();
     } else if (!content) {
-      alert('글을 작성해주세요. ');
+      alert('글을 작성해주세요. '); //content에 글을 작성하지 않으면 실행됩니다.
       inputContenet.current.focus();
     } else {
       const updateItem = { ...item, title, content };
       dispatch({ type: UPDATE_ITEM, item: updateItem }); //item대신 updateItem을 전달한다.
-      const localList = localStorage.getItem('list');
-      const list = localList ? JSON.parse(localList) : [];
+      const localList = localStorage.getItem('list'); //localstorage에 있는 list에 key값을 가져옵니다.
+      const list = localList ? JSON.parse(localList) : []; //json타입으려 변환해줍니다.
       const updateList = list.map((listItem) => (listItem.id === updateItem.id ? updateItem : listItem));
-      localStorage.setItem('list', JSON.stringify(updateList));
-      navigate(`/detail/${item.id}`);
+      localStorage.setItem('list', JSON.stringify(updateList)); // loacalstorage에 있는 list에 json타입으로 저장합니다.
+      navigate(`/detail/${item.id}`); //수정 후 item에 있는 id를 가지고 detail로 갑니다.
     }
   };
   // localStorage에서 list키 값을 가져와 파싱하여 'list'배열로 변환한다.
