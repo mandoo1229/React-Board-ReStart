@@ -17,14 +17,14 @@ const Detail = memo(({ dispatch }) => {
 
   const onClickDelete = useCallback(() => {
     if (item) {
-      dispatch({ type: DELETE_ITEM, id: item.id });
+      dispatch({ type: DELETE_ITEM, id: item.id }); //DELETE_ITEM을 꺼내서 사용합니다. id 값을 전달한다.
 
-      const localList = localStorage.getItem('list');
-      const list = localList ? JSON.parse(localList) : [];
-      const updateList = list.filter((listItem) => listItem.id !== item.id);
-      localStorage.setItem('list', JSON.stringify(updateList));
+      const localList = localStorage.getItem('list'); //localstorage에 있는 list의 key값을 가져옵니다.
+      const list = localList ? JSON.parse(localList) : []; //localList에 있는 변수의 값을 JSON형식의 문자열로 변환한다. 빈 배열이면 빈 배열을 list에 할당한다.
+      const updateList = list.filter((listItem) => listItem.id !== item.id); //list배열을 필터링하여 item.id와 일치하지 않는 id를 가진 요소들은 새로운 배열을 생성한다.
+      localStorage.setItem('list', JSON.stringify(updateList)); //upadateList를 JSON 형식의 문자열로 변환하여 localStorage에 있는 list의 key에 저장한다.
       alert('삭제 되었습니다.');
-      navigate('/');
+      navigate('/'); //삭제후 홈으로 가집니다.
     } else {
       console.log('취소되었습니다.');
     }
@@ -53,7 +53,7 @@ const Detail = memo(({ dispatch }) => {
                 목록으로 가기
               </Link>
             </Button>
-            <Button variant="contained" href={`/update/${item.id}`} style={{ marginLeft: '700px' }}>
+            <Button variant="contained" href={`/update/${item.id}`} style={{ marginLeft: '400px' }}>
               <Link to={`/update/${item.id}`} style={{ color: 'inherit', textDecoration: 'none' }}>
                 수정
               </Link>
