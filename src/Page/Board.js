@@ -6,6 +6,7 @@ import Detail from './Detail';
 import Write from './Write';
 import List from './List';
 import Header from './Header';
+import TodoTemplate from '../todoList/TodoTemplate';
 
 const initialState = {
   list: [],
@@ -36,6 +37,7 @@ const Board = () => {
             <Route path="/write" element={<Write id={id} dispatch={dispatch} />} />
             <Route path="/update/:id" element={<Update dispatch={dispatch} />} />
             <Route path="/detail/:id" element={<Detail dispatch={dispatch} />} />
+            <Route path="/todoTemplate" element={<TodoTemplate dispatch={dispatch} />} />
           </Routes>
         </div>
       </BrowserRouter>
