@@ -2,6 +2,9 @@ import React from 'react';
 import { useEffect } from 'react';
 import { CHANGE_MENU } from '../reducers/BoardReducer';
 import styled from '@emotion/styled';
+import TodoHead from './TodoHead';
+import TodoList from './TodoList';
+import TodoCreate from './TodoCreate';
 
 const TodoTemplateBlock = styled.div`
   width: 512px;
@@ -24,6 +27,13 @@ function TodoTemplate({ children, dispatch }) {
   useEffect(() => {
     dispatch({ type: CHANGE_MENU, menu: 'Todo' });
   }, [dispatch]);
-  return <TodoTemplateBlock>{children}</TodoTemplateBlock>;
+  return (
+    <TodoTemplateBlock>
+      {children}
+      <TodoHead />
+      <TodoList />
+      <TodoCreate />
+    </TodoTemplateBlock>
+  );
 }
 export default TodoTemplate;
