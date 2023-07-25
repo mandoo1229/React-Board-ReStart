@@ -37,7 +37,7 @@ const Board = () => {
             <Route path="/write" element={<Write id={id} dispatch={dispatch} />} />
             <Route path="/update/:id" element={<Update dispatch={dispatch} />} />
             <Route path="/detail/:id" element={<Detail dispatch={dispatch} />} />
-            <Route path="/todoTemplate" element={<TodoTemplate dispatch={dispatch} />} />
+            <Route path="/todoTemplate" element={<TodoTemplate dispatch={dispatch} />}></Route>
           </Routes>
         </div>
       </BrowserRouter>
