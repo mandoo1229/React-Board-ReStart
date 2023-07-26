@@ -5,6 +5,7 @@ import styled from '@emotion/styled';
 import TodoHead from './TodoHead';
 import TodoList from './TodoList';
 import TodoCreate from './TodoCreate';
+import { TodoProvider } from '../reducers/TodoContex';
 
 const TodoTemplateBlock = styled.div`
   width: 512px;
@@ -28,12 +29,14 @@ function TodoTemplate({ children, dispatch }) {
     dispatch({ type: CHANGE_MENU, menu: 'Todo' });
   }, [dispatch]);
   return (
-    <TodoTemplateBlock>
-      {children}
-      <TodoHead />
-      <TodoList />
-      <TodoCreate />
-    </TodoTemplateBlock>
+    <TodoProvider>
+      <TodoTemplateBlock>
+        {/* {children} */}
+        <TodoHead />
+        <TodoList />
+        <TodoCreate />
+      </TodoTemplateBlock>
+    </TodoProvider>
   );
 }
 export default TodoTemplate;

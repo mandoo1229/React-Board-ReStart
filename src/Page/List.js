@@ -103,12 +103,7 @@ const List = memo(({ list, dispatch }) => {
             );
           })}
           <div className="button-container">
-            <Button
-              variant="contained"
-              size="small"
-              color="secondary"
-              style={{ color: 'white', marginRight: '9%', marginLeft: '2%' }}
-            >
+            <Button variant="contained" size="small" color="secondary">
               <Link to="/write" style={{ color: 'inherit', textDecoration: 'none' }}>
                 write
               </Link>
