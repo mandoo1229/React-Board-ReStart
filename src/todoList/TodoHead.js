@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
+import { useTodoState } from '../reducers/TodoContex';
 
 const TodoHeadBlock = styled.div`
   padding-top: 48px;
@@ -28,6 +29,8 @@ const TodoHeadBlock = styled.div`
 `;
 
 function TodoHead() {
+  const todos = useTodoState();
+  const undoneTasks = todos.filter((todo) => !todo.done);
   const [timer, setTimer] = useState('00:00:00');
   const [week, setWeek] = useState('');
 
@@ -58,7 +61,7 @@ function TodoHead() {
     <TodoHeadBlock>
       <h1>{timer}</h1>
       <div className="day">{week}</div>
-      <div className="tasks-left ">할일 남음</div>
+      <div className="tasks-left ">할일 {undoneTasks.length}개 남음 </div>
     </TodoHeadBlock>
   );
 }
