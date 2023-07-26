@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import TodoItem from './TodoItme';
+import { useTodoState } from '../reducers/TodoContex';
 
 const TodoListBlock = styled.div`
   flex: 1;
@@ -10,11 +11,12 @@ const TodoListBlock = styled.div`
 `;
 
 function TodoList() {
+  const tods = useTodoState();
   return (
     <TodoListBlock>
-      <TodoItem text="프로젝트 생성" done={true} />
-      <TodoItem text="CRUD 과제 하기" done={true} />
-      <TodoItem text="API활용해보기" done={false} />
+      {tods.map((todo) => (
+        <TodoItem key={todo.id} id={todo.id} text={todo.text} done={todo.done} />
+      ))}
     </TodoListBlock>
   );
 }
