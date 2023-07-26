@@ -102,15 +102,15 @@ const List = memo(({ list, dispatch }) => {
               </tr>
             );
           })}
-          <div className="button-container">
-            <Button variant="contained" size="small" color="secondary">
-              <Link to="/write" style={{ color: 'inherit', textDecoration: 'none' }}>
-                write
-              </Link>
-            </Button>
-          </div>
         </tbody>
       </table>
+      <div className="button-container">
+        <Button variant="contained" size="small" color="secondary">
+          <Link to="/write" style={{ color: 'inherit', textDecoration: 'none' }}>
+            write
+          </Link>
+        </Button>
+      </div>
       <div className="pagination-container">
         <Pagination
           style={{ marginTop: '20px' }}
