@@ -26,6 +26,7 @@ const List = memo(({ list, dispatch }) => {
     },
     [dispatch, list]
   );
+  // 조회수 기능입니다. list item을 클릭했을 때 호출되는 콜백함수이다. 아이템의 조회수를 증가시키고 업데이트 된 것을 localStorage에 저장한다.
 
   useEffect(() => {
     dispatch({ type: CHANGE_MENU, menu: 'List' });
@@ -34,13 +35,19 @@ const List = memo(({ list, dispatch }) => {
   const handleSearch = () => {
     const filteredList = list.filter((item) => {
       if (searchBy === 'title') {
+        // 검색 항목을 title인 경우를 처리하는 블록이다.
         return item.title.toLowerCase().includes(search.toLowerCase());
+        //title 안에 있는 내용을 includes를 사용하여 검색어가 속성에 포함되어 있는지 여부를 확인하여 포함 되어 있으면 true를 반환한다.
       } else if (searchBy === 'content') {
+        // 검색 항목을 content 경우를 처리하는 블록이다.
         return item.content.toLowerCase().includes(search.toLowerCase());
+        //content 안에 있는 내용을 includes를 사용하여 검색어가 속성에 포함되어 있는지 여부를 확인하여 포함 되어 있으면 true를 반환한다.
       }
       return false;
+      //검색했을 때 내용이 없으면 false로 반환한다.
     });
     setFilteredItems(filteredList);
+    //setFilter함수를 사용하여 filteredList 상태를 업데이트 한다.
   };
 
   const handleInputChange = (e) => {
@@ -52,6 +59,7 @@ const List = memo(({ list, dispatch }) => {
     const endIndex = startIndex + itemsPerPage;
     return data.slice(startIndex, endIndex);
   };
+  // 페이지 번호와 페이지당 보여줄 수 있는 아이템 수를 이용하여 데이터를 잘라서 해당 페이지를 보여줄 아이템들을 반환한다.
 
   const sortedList = [...list].reverse(); // 최신글이 1페이지에 오도록 역순으로 정렬
 
