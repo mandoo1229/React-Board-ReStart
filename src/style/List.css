@@ -150,7 +150,7 @@
 .ck.ck-editor__editable:not(.ck-editor__nested-editable) {
   min-height: 400px;
   margin-bottom: 20px;
-  max-width: 60%;
+  max-width: 58.7%;
   margin: 0 auto;
 }
 
@@ -163,5 +163,5 @@
   display: flex;
   justify-content: center;
   margin: 0 auto;
-  width: 61%;
+  width: 60%;
 }
