@@ -117,7 +117,7 @@ const Write = memo(({ id, dispatch }) => {
         }}
       />
 
-      <div style={{ display: 'flex', justifyContent: 'flex-end', width: '60%', marginTop: '16px' }}>
+      <div style={{ display: 'flex', justifyContent: 'flex-end', width: '80%', marginTop: '16px' }}>
         <Button className="Button-save" variant="contained" onClick={onClickSubmit}>
           저장
         </Button>
