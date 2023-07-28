@@ -38,8 +38,8 @@ const Detail = memo(({ dispatch }) => {
             <div className="info">
               <dl>
                 <dt>작성일 : </dt>
-                {/* <dd>{item.date}</dd> */}
                 <dd dangerouslySetInnerHTML={{ __html: item.date }} />
+                {/* localStroage에 저장되어 있는 내용들을 html로 변환해서 보여줍니다. */}
               </dl>
               <dl>
                 <dt>조회수 : </dt>
