@@ -41,22 +41,21 @@ function TodoHead() {
     const seconds = String(date.getSeconds()).padStart(2, '0');
     setTimer(`${hours}:${minutes}:${seconds}`);
   };
-  //   const startTimer = () => {
-  //     setInterval(currentTimer, 1000);
-  //   };
-  //   startTimer();
+  //로컬 시간에 맞춰서 시간을 바로 보여줍니다.
 
   const dayCurrentWeek = () => {
     const daysWeek = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'];
     const date = new Date();
     return daysWeek[date.getDay()];
   };
+  // 로컬 시간에 맞춰서 요일을 보여줍니다.
 
   useEffect(() => {
     const timerInterval = setInterval(currentTimer, 1000);
     setWeek(dayCurrentWeek());
     return () => clearInterval(timerInterval);
   }, []);
+
   return (
     <TodoHeadBlock>
       <h1>{timer}</h1>
