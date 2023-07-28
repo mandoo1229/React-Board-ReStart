@@ -38,14 +38,15 @@ const Detail = memo(({ dispatch }) => {
             <div className="info">
               <dl>
                 <dt>작성일 : </dt>
-                <dd>{item.date}</dd>
+                {/* <dd>{item.date}</dd> */}
+                <dd dangerouslySetInnerHTML={{ __html: item.date }} />
               </dl>
               <dl>
                 <dt>조회수 : </dt>
                 <dd>{item.views}</dd>
               </dl>
             </div>
-            <div className="cont"> {item.content} </div>
+            <div className="cont" dangerouslySetInnerHTML={{ __html: item.content }}></div>
           </div>
           <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '100px' }}>
             <Button variant="contained" color="secondary" href="/">
