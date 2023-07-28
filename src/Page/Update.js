@@ -50,17 +50,10 @@ const Update = memo(({ dispatch }) => {
       alert('글을 작성해주세요. '); //content에 글을 작성하지 않으면 실행됩니다.
       inputContenet.current.focus();
     } else {
-      const item = {
-        id: id,
-        title: title,
-        content: editorRef.current.getData(), // 에디터의 내용을 가져옴
-        // date: formatDateTime(new Date()),
-        views: 0,
-      };
       const updateItem = { ...item, title, content };
       dispatch({ type: UPDATE_ITEM, item: updateItem }); //item대신 updateItem을 전달한다.
       const localList = localStorage.getItem('list'); //localstorage에 있는 list에 key값을 가져옵니다.
-      const list = localList ? JSON.parse(localList) : []; //json타입으려 변환해줍니다.
+      const list = localList ? JSON.parse(localList) : []; //json타입으로 변환해줍니다.
       const updateList = list.map((listItem) => (listItem.id === updateItem.id ? updateItem : listItem));
       localStorage.setItem('list', JSON.stringify(updateList)); // loacalstorage에 있는 list에 json타입으로 저장합니다.
       navigate(`/detail/${item.id}`); //수정 후 item에 있는 id를 가지고 detail로 갑니다.
@@ -95,7 +88,7 @@ const Update = memo(({ dispatch }) => {
               placeholder: '내용을 입력해주세요.',
             }}
             onBlur={(event, editor) => {
-              // console.log('Blur.', editor);
+              console.log('Blur.', editor);
             }}
             onFocus={(event, editor) => {
               console.log('Focus.', editor);
@@ -103,8 +96,7 @@ const Update = memo(({ dispatch }) => {
             onChange={(event, editor) => {
               // 에디터의 내용이 변경될 때마다 'content' 변수를 업데이트합니다.
               const data = editor.getData();
-              onChangeInput({ target: { name: 'content', value: data } });
-              // setContent(data);
+              setContent(data);
             }}
             onReady={(editor) => {
               editorRef.current = editor;
@@ -112,7 +104,7 @@ const Update = memo(({ dispatch }) => {
             }}
           />
 
-          <div style={{ display: 'flex', justifyContent: 'flex-end', width: '60%', marginTop: '2%' }}>
+          <div style={{ display: 'flex', justifyContent: 'flex-end', width: '80%', marginTop: '2%' }}>
             <Button variant="contained" onClick={onClickSubmit}>
               저장
             </Button>
