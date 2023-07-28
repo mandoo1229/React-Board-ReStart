@@ -1,6 +1,8 @@
-import React, { useRef, useEffect, memo } from 'react';
+import React, { useRef, useEffect, memo, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { CHANGE_MENU, UPDATE_ITEM } from '../reducers/BoardReducer';
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import useInputs from '../hook/useInput';
 import { getLocalItem } from '../utill/utill';
 import TextField from '@mui/material/TextField';
@@ -11,12 +13,15 @@ const Update = memo(({ dispatch }) => {
   const { id } = useParams();
   const item = getLocalItem(id);
   const navigate = useNavigate();
+  const [content, setContent] = useState();
+  const editorRef = useRef();
+  const [editorLoaded, setEditorLoaded] = useState(false);
   const [state, onChangeInput] = useInputs({
     title: item ? item.title : '',
     content: item ? item.content : '',
   });
 
-  const { title, content } = state;
+  const { title } = state;
   const inputTitle = useRef(null);
   const inputContenet = useRef(null);
 
@@ -27,6 +32,16 @@ const Update = memo(({ dispatch }) => {
     }
   }, [dispatch]);
 
+  useEffect(() => {
+    if (editorLoaded && editorRef.current) {
+      setContent(editorRef.current.getData());
+    }
+  }, [editorLoaded]);
+  const onEditorReady = (editor) => {
+    editorRef.current = editor;
+    setEditorLoaded(true);
+  };
+
   const onClickSubmit = () => {
     if (!title) {
       alert('제목을 작성해주세요.'); //title에 글을 작성하지 않으면 실행됩니다.
@@ -35,6 +50,13 @@ const Update = memo(({ dispatch }) => {
       alert('글을 작성해주세요. '); //content에 글을 작성하지 않으면 실행됩니다.
       inputContenet.current.focus();
     } else {
+      const item = {
+        id: id,
+        title: title,
+        content: editorRef.current.getData(), // 에디터의 내용을 가져옴
+        // date: formatDateTime(new Date()),
+        views: 0,
+      };
       const updateItem = { ...item, title, content };
       dispatch({ type: UPDATE_ITEM, item: updateItem }); //item대신 updateItem을 전달한다.
       const localList = localStorage.getItem('list'); //localstorage에 있는 list에 key값을 가져옵니다.
@@ -50,7 +72,7 @@ const Update = memo(({ dispatch }) => {
   return (
     <div>
       {item ? (
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        <div className="App">
           <TextField
             id="outlined-multiline-flexible"
             label="제목을 작성해주세요"
@@ -63,17 +85,33 @@ const Update = memo(({ dispatch }) => {
             onChange={onChangeInput}
           />
           <br></br>
-          <TextField
-            id="outlined-multiline-static"
-            ref={inputContenet}
-            multiline
-            rows={20}
-            style={{ width: '60%', marginTop: '1%' }}
-            defaultValue="내용을 입력해주세요. "
-            name="content"
-            value={content}
-            onChange={onChangeInput}
+          <br></br>
+          <br></br>
+
+          <CKEditor
+            editor={ClassicEditor}
+            data={content}
+            config={{
+              placeholder: '내용을 입력해주세요.',
+            }}
+            onBlur={(event, editor) => {
+              // console.log('Blur.', editor);
+            }}
+            onFocus={(event, editor) => {
+              console.log('Focus.', editor);
+            }}
+            onChange={(event, editor) => {
+              // 에디터의 내용이 변경될 때마다 'content' 변수를 업데이트합니다.
+              const data = editor.getData();
+              onChangeInput({ target: { name: 'content', value: data } });
+              // setContent(data);
+            }}
+            onReady={(editor) => {
+              editorRef.current = editor;
+              onEditorReady(editor);
+            }}
           />
+
           <div style={{ display: 'flex', justifyContent: 'flex-end', width: '60%', marginTop: '2%' }}>
             <Button variant="contained" onClick={onClickSubmit}>
               저장
