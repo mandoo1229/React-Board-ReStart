@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, memo } from 'react';
+import React, { useRef, useEffect, memo, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ADD_ITEM, CHANGE_MENU } from '../reducers/BoardReducer';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
@@ -18,10 +18,12 @@ function formatDateTime(date) {
 const Write = memo(({ id, dispatch }) => {
   const item = {};
   const [state, onChangeInput] = useInputs({ title: '', content: '' });
-  const { title, content } = state;
+  const { title } = state;
   const inputTitle = useRef(null);
   const inputContent = useRef(null);
   const editorRef = useRef();
+  const [content, setContent] = useState();
+  const [editorLoaded, setEditorLoaded] = useState(false);
 
   const navigate = useNavigate();
   //navigate는 페이지를 이동할 때 사용함.
@@ -32,14 +34,29 @@ const Write = memo(({ id, dispatch }) => {
   }, [dispatch]);
   // 컴포넌트가 랜더링 될 때와 'dispatch'가 변경될 때 실행된다.
 
+  useEffect(() => {
+    if (editorLoaded && editorRef.current) {
+      setContent(editorRef.current.getData());
+    }
+  }, [editorLoaded]);
+
+  const onEditorReady = (editor) => {
+    editorRef.current = editor;
+    setEditorLoaded(true);
+  };
+
   const onClickSubmit = () => {
     if (!title) {
       alert('제목을 작성해주세요');
-      inputTitle.current?.focus();
+      if (inputTitle.current) {
+        inputTitle.current.focus();
+      }
       //title에 글을 작성하지 않았을 때 실행됨
     } else if (!content) {
       alert('내용을 작성해주세요');
-      inputContent.current.focus();
+      if (inputContent.current) {
+        inputContent.current.focus();
+      }
       // content에 값을 입력하지 않았을 때 실행됨
     } else {
       item.id = id;
@@ -54,7 +71,7 @@ const Write = memo(({ id, dispatch }) => {
       localStorage.setItem('list', JSON.stringify(list));
       localStorage.setItem('id', id + 1);
       navigate(`/detail/${item.id}`);
-      item.content = editorRef.current.getDate();
+      item.content = content;
     }
   };
   // onClickSubmit을 클릭했을 때 실행되는 함수입니다. 글을 작성하고, 내용을 작성했을 때 else문이 실행됩니다.
@@ -77,15 +94,27 @@ const Write = memo(({ id, dispatch }) => {
       <br></br>
       <br></br>
       <br></br>
+
       <CKEditor
         editor={ClassicEditor}
+        data={content}
         config={{
           placeholder: '내용을 입력해주세요.',
         }}
-        ref={editorRef}
-        value={content}
-        onChange={onChangeInput}
-        name="content"
+        onBlur={(event, editor) => {
+          console.log('Blur.', editor);
+        }}
+        onFocus={(event, editor) => {
+          console.log('Focus.', editor);
+        }}
+        onChange={(event, editor) => {
+          // 에디터의 내용이 변경될 때마다 'content' 변수를 업데이트합니다.
+          const data = editor.getData();
+          setContent(data);
+        }}
+        onReady={(editor) => {
+          onEditorReady(editor);
+        }}
       />
 
       <div style={{ display: 'flex', justifyContent: 'flex-end', width: '60%', marginTop: '16px' }}>
