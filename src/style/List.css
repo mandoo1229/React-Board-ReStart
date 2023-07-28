@@ -158,3 +158,10 @@
   max-width: 60%;
   margin: 0 auto;
 }
+
+.ck .ck-toolbar_grouping {
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  width: 61%;
+}
