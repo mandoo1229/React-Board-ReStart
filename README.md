@@ -39,7 +39,8 @@
 </details>
 
 <h2>TodoList<h2>
-- Context를 활용해서 상태관리를 함. 
+
+- Context를 활용해서 상태관리를 함.
 - TodoList를 작성하고, 지울 수 있고 체크할 수 도 있습니다.
 
 <h2>개발환경</h2>
